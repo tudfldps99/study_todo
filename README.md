@@ -19,3 +19,8 @@
 ## 서버 연결 확인 설정
 1. src/main/java/com/example/study_todo/HealthCheckController.java 생성 및 작성
 2. 톰캣 실행 시 server is running... 뜨는지 확인 (http://localhost:8080)
+
+## Entity, Repository, Service, Controller 작성
+![img.png](README_IMG/Spring.png)
+- Entity
+1. src/main/java/com/example/study_todo/entity/TodoEntity.java 생성 및 작성
