@@ -22,5 +22,16 @@
 
 ## Entity, Repository, Service, Controller 작성
 ![img.png](README_IMG/Spring.png)
-- Entity
+
+- Entity 
+: Domain
+
 1. src/main/java/com/example/study_todo/entity/TodoEntity.java 생성 및 작성
+
+
+- Repository
+: Entity 에 의해 생성된 DB 에 접근하는 메서드들을 사용하기 위한 인터페이스
+
+2. src/main/java/com/example/study_todo/repository/TodoRepository.java (interface) 생성 및 작성
+3. Test 파일 생성 = repository 에서 Ctrl + Shift + t 로 테스트파일 생성 (TodoRepositoryTest.java)
+![img.png](README_IMG/create_TestFile.png)
