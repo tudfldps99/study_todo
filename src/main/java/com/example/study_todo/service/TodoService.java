@@ -38,7 +38,7 @@ public class TodoService {      // 중간처리
     }
 
     // 할 일 등록
-    public TodoListResponseDTO create( final TodoCreateRequestDTO createRequestDTO ) {
+    public TodoListResponseDTO create( final TodoCreateRequestDTO createRequestDTO ) throws RuntimeException {
         todoRepository.save(createRequestDTO.toEntity());       // DTO 를 Entity 로 변환해서, save 메서드 안에 넣기 --> TodoCreateRequestDTO.java 참고
 
         log.info("할 일이 저장되었습니다. 제목: {}", createRequestDTO.getTitle());
