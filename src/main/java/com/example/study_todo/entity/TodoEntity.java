@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 
 @Entity                 // 데이터베이스 테이블
 @Table(name = "tbl_todo")       // 테이블 명칭 지정
-public class TodoEntity {
+public class TodoEntity {           // DB 와 연결할 때만
 
     @Id                 // 테이블 상의 Primary Key
     @GeneratedValue(generator = "system-uuid")      // 랜덤으로 생성

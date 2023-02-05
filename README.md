@@ -40,3 +40,12 @@
 : 비즈니스 로직을 수행하고 DB에 접근하는 DAO 를 이용해서 결과값을 받아옴 (중간처리) (DAO - Repository(JPA))
 
 4. src/main/java/com/example/study_todo/service/TodoService.java 생성 및 작성
+
+- DTO
+: 
+
+-> TodoService.java 수정하면서 DTO 파일 생성
+5. src/main/java/com/example/study_todo/dto/response/TodoListResponseDTO.java 생성 및 작성
+6. src/main/java/com/example/study_todo/dto/response/TodoDetailResponseDTO.java 생성 및 작성
+7. src/main/java/com/example/study_todo/dto/request/TodoCreateRequestDTO.java 생성 및 작성
+8. src/main/java/com/example/study_todo/dto/request/TodoModifyRequestDTO.java 생성 및 작성
