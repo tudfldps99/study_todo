@@ -45,7 +45,9 @@
 : 
 
 -> TodoService.java 수정하면서 DTO 파일 생성
+
 5. src/main/java/com/example/study_todo/dto/response/TodoListResponseDTO.java 생성 및 작성
 6. src/main/java/com/example/study_todo/dto/response/TodoDetailResponseDTO.java 생성 및 작성
 7. src/main/java/com/example/study_todo/dto/request/TodoCreateRequestDTO.java 생성 및 작성
 8. src/main/java/com/example/study_todo/dto/request/TodoModifyRequestDTO.java 생성 및 작성
+9. Test 파일 생성 = repository 에서 Ctrl + Shift + t 로 테스트파일 생성 (TodoServiceTest.java)
