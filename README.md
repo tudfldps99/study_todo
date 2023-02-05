@@ -35,3 +35,8 @@
 2. src/main/java/com/example/study_todo/repository/TodoRepository.java (interface) 생성 및 작성
 3. Test 파일 생성 = repository 에서 Ctrl + Shift + t 로 테스트파일 생성 (TodoRepositoryTest.java)
 ![img.png](README_IMG/create_TestFile.png)
+
+- Service
+: 비즈니스 로직을 수행하고 DB에 접근하는 DAO 를 이용해서 결과값을 받아옴 (중간처리) (DAO - Repository(JPA))
+
+4. src/main/java/com/example/study_todo/service/TodoService.java 생성 및 작성
