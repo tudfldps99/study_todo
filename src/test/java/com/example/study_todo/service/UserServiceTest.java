@@ -38,9 +38,9 @@ class UserServiceTest {
     void createTest() {
         // given
         UserSignUpRequestDTO dto = UserSignUpRequestDTO.builder()
-                .email("qwer5678@def.com")
-                .password("5678")
-                .userName("개똥이")
+                .email("asdf9012@def.com")
+                .password("9012")
+                .userName("소똥이")
                 .build();
 
         // when
@@ -48,6 +48,6 @@ class UserServiceTest {
 
         // then
         System.out.println("responseDTO = " + responseDTO);
-        assertEquals("개똥이", responseDTO.getUserName());
+        assertEquals("소똥이", responseDTO.getUserName());
     }
 }

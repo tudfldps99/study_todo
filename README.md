@@ -88,6 +88,25 @@
 6. src/main/java/com/example/study_todo/dto/request/UserSignUpRequestDTO.java 생성 및 작성
 7. Test 파일 생성 = repository 에서 Ctrl + Shift + t 로 테스트파일 생성 (TodoServiceTest.java)
 
+- 패스워드 인코딩
+  : 
+
+8. build.gradle 파일에 '스프링 시큐리티 모듈', 'json web token 라이브러리' 추가 후 build
+
+```
+  // 스프링 시큐리티 모듈
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  
+  // json web token 라이브러리
+  implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+  implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+  implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2' 
+```
+
+9. src/main/java/com/example/study_todo/config/WebSecurityConfig.java 생성 및 작성
+10. 패스워드 인코딩 클래스에 맞게 UserService.java, UserServiceTest.java 파일 수정
+![img.png](README_IMG/password_Incoding.png)
+
 ---
 ## 필기
 - Health Check : 서버 상태 확인
@@ -113,3 +132,4 @@
 - @RequestBody : HttpRequest 의 본문 RequestBody 의 내용을 자바 객체로 매핑 
 - @BindingResult : ModelAttribute 을 이용하여 매개변수를 Bean 에 binding 할 때, 발생한 오류 정보를 받기 위해 선언해야 하는 어노테이션
 - @PathVariable("id") : id를 경로에서 읽음
+- @EnableWebSecurity : 사용자 정의 보안 정의 클래스 활성화
