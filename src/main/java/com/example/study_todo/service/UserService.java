@@ -46,4 +46,13 @@ public class UserService {
         // savedUser 를 그대로 return 하면, 클라이언트에게 비밀번호 등 모든 것을 보여주는 것이므로, UserSignUpResponseDTO 에서 dto 로 변환시켜서 return
         return new UserSignUpResponseDTO(savedUser);
     }
+
+    // 이메일 중복 확인
+    public boolean isDuplicate(String email) {
+        if (email == null) {
+            throw new RuntimeException("이메일 값이 업습니다.");
+        }
+
+        return userRepository.existsByEmail(email);
+    }
 }

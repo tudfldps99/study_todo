@@ -107,9 +107,18 @@
 10. 패스워드 인코딩 클래스에 맞게 UserService.java, UserServiceTest.java 파일 수정
 ![img.png](README_IMG/password_Incoding.png)
 
+- Controller
+  : 사용자의 요청을 처리한 뒤 지정된 뷰에 모델 객체를 넘겨주는 역할.
+  즉, 사용자의 요청이 진입하는 지점, 요청에 따라 어떤 처리를 할지 결정을 Service 에게 넘겨줌. 그 후 Service 에서 실질적으로 처리한 내용을 view 에게 넘겨줌
+
 11. src/main/java/com/example/study_todo/controller/UserApiController.java 생성 및 작성
+
+
 12. src/main/java/com/example/study_todo/DuplicatedEmailException.java, NoRegisteredArgumentsException.java 생성 및 작성
 13. 사용자 정의 예외 클래스에 맞게 UserService.java 파일 수정
+14. security builder 설정 (WebSecurityConfig.java)
+15. 이메일 중복 확인을 위해 UserService.java, UserApiController.java 파일 수정
+
 
 ---
 ## 필기

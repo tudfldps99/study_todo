@@ -10,15 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")        // 공통 URL
+@CrossOrigin
 public class UserApiController {
 
     private final UserService userService;
@@ -57,5 +55,24 @@ public class UserApiController {
                     .badRequest()
                     .body(e.getMessage());
         }
+    }
+
+    // 이메일 중복확인 요청 처리
+    // GET : /api/auth/check?email="abc@bbb.com"        <- RequestParam
+    @GetMapping("/check")
+    public ResponseEntity<?> checkEmail (@RequestParam String email) {      // @RequestParam 생략 가능 (@RequestBody 는 생략 불가능)
+        if (email == null || email.trim().equals("")) {     // trim() : 공백 제거
+            return ResponseEntity
+                    .badRequest()
+                    .body("이메일을 전달해주세요.");
+        }       // @RequestParam 에 required = true 가 숨어있기때문에 애초에 이메일 값을 안보내면 spring 선에서 안보내기 때문에 이 if 문은 의미 없는 문장
+                // 그러나 나중에 변경될 거에 대비하여 작성 (보험코드)
+
+        boolean flag = userService.isDuplicate(email);
+        log.info("{} 중복 여부 ? = {}", email, flag);
+
+        return ResponseEntity
+                .ok()
+                .body(flag);
     }
 }
