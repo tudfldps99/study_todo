@@ -114,13 +114,27 @@
 11. src/main/java/com/example/study_todo/controller/UserApiController.java 생성 및 작성
 
 
+- 사용자 정의 예외 클래스
+
 12. src/main/java/com/example/study_todo/DuplicatedEmailException.java, NoRegisteredArgumentsException.java 생성 및 작성
 13. 사용자 정의 예외 클래스에 맞게 UserService.java 파일 수정
+
+- security builder
+
 14. security builder 설정 (WebSecurityConfig.java)
 15. 이메일 중복 확인을 위해 UserService.java, UserApiController.java 파일 수정
 
 
 16. 로그인 검증을 위해 UserService.java, UserServiceTest.java 파일 수정
+
+
+- Token
+
+src/main/java/com/example/study_todo/security/TokenProvider.java 생성 및 작성
+18. src/main/java/com/example/study_todo/dto/response/LoginResponseDTO.java 생성 및 작성
+19. UserService.java 수정 
+20. src/main/java/com/example/study_todo/dto/request/LoginRequestDTO.java 생성 및 작성
+21. UserApiController.java 수정
 
 
 ---

@@ -1,6 +1,7 @@
 package com.example.study_todo.service;
 
 import com.example.study_todo.dto.request.UserSignUpRequestDTO;
+import com.example.study_todo.dto.response.LoginResponseDTO;
 import com.example.study_todo.dto.response.UserSignUpResponseDTO;
 import com.example.study_todo.entity.UserEntity;
 import org.junit.jupiter.api.DisplayName;
@@ -88,7 +89,7 @@ class UserServiceTest {
         String password = "9012";
 
         // when
-        UserEntity loginUser = userService.getByCredentials(email, password);
+        LoginResponseDTO loginUser = userService.getByCredentials(email, password);
 
         // then
         assertEquals("소똥이", loginUser.getUserName());

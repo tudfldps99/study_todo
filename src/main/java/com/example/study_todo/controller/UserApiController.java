@@ -1,7 +1,10 @@
 package com.example.study_todo.controller;
 
+import com.example.study_todo.dto.request.LoginRequestDTO;
 import com.example.study_todo.dto.request.UserSignUpRequestDTO;
+import com.example.study_todo.dto.response.LoginResponseDTO;
 import com.example.study_todo.dto.response.UserSignUpResponseDTO;
+import com.example.study_todo.entity.UserEntity;
 import com.example.study_todo.exception.DuplicatedEmailException;
 import com.example.study_todo.exception.NoRegisteredArgumentsException;
 import com.example.study_todo.service.UserService;
@@ -74,5 +77,28 @@ public class UserApiController {
         return ResponseEntity
                 .ok()
                 .body(flag);
+    }
+
+    // 로그인 요청 처리
+    @PostMapping("/signin")
+    public ResponseEntity<?> signIn(@Validated @RequestBody LoginRequestDTO requestDTO) {
+
+        try {
+            LoginResponseDTO userInfo = userService.getByCredentials(
+                    requestDTO.getEmail(),
+                    requestDTO.getPassword()
+            );
+
+            return ResponseEntity
+                    .ok()
+                    .body(userInfo);
+        } catch (RuntimeException e) {      // 가입을 안했거나, 비밀번호가 틀렸거나
+            return ResponseEntity
+                    .badRequest()
+                    .body(LoginResponseDTO.builder()
+                            .message(e.getMessage())
+                            .build()
+                    );
+        }
     }
 }

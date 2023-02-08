@@ -1,11 +1,13 @@
 package com.example.study_todo.service;
 
 import com.example.study_todo.dto.request.UserSignUpRequestDTO;
+import com.example.study_todo.dto.response.LoginResponseDTO;
 import com.example.study_todo.dto.response.UserSignUpResponseDTO;
 import com.example.study_todo.entity.UserEntity;
 import com.example.study_todo.exception.DuplicatedEmailException;
 import com.example.study_todo.exception.NoRegisteredArgumentsException;
 import com.example.study_todo.repository.UserRepository;
+import com.example.study_todo.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;      // final 로 생성하면 @RequiredArgsConstructor 를 이용하여 자동으로 생성자 주입됨
+
+    private final TokenProvider tokenProvider;
 
     // 회원가입 처리
     public UserSignUpResponseDTO create (final UserSignUpRequestDTO userSignUpRequestDTO) {
@@ -57,7 +61,7 @@ public class UserService {
     }
 
     // 로그인 검증
-    public UserEntity getByCredentials(final String email, final String rawPassword) {
+    public LoginResponseDTO getByCredentials(final String email, final String rawPassword) {
         // 입력한 이메일을 통해 회원정보 조회
         UserEntity originalUSer = userRepository.findByEmail(email);
         if (originalUSer == null) {     // 가입 안한 사용자
@@ -71,6 +75,9 @@ public class UserService {
 
         log.info("{}님 로그인 성공", originalUSer.getUserName());
 
-        return originalUSer;        // 로그인 한 회원의 정보 return
+        // 로그인 성공 후 토큰 발급
+        String token = tokenProvider.createToken(originalUSer);
+
+        return new LoginResponseDTO(originalUSer, token);
     }
 }
