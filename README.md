@@ -107,6 +107,10 @@
 10. 패스워드 인코딩 클래스에 맞게 UserService.java, UserServiceTest.java 파일 수정
 ![img.png](README_IMG/password_Incoding.png)
 
+11. src/main/java/com/example/study_todo/controller/UserApiController.java 생성 및 작성
+12. src/main/java/com/example/study_todo/DuplicatedEmailException.java, NoRegisteredArgumentsException.java 생성 및 작성
+13. 사용자 정의 예외 클래스에 맞게 UserService.java 파일 수정
+
 ---
 ## 필기
 - Health Check : 서버 상태 확인
