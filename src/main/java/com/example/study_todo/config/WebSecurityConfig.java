@@ -1,5 +1,7 @@
 package com.example.study_todo.config;
 
+import com.example.study_todo.security.JwtAuthFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -7,9 +9,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity      // 사용자 정의 보안 정의 클래스 활성화
+@RequiredArgsConstructor
 public class WebSecurityConfig {        // 사용자 정의 보안 설정 클래스
+
+    private final JwtAuthFilter jwtAuthFilter;
 
     // 패스워드 인코딩 클래스 등록 (패스워드 인코딩 클래스 : 내가 등록한 클래스가 아님)
     @Bean
@@ -29,8 +35,14 @@ public class WebSecurityConfig {        // 사용자 정의 보안 설정 클래
                 .httpBasic().disable()      // 기본 security 인증 해제 (우리는 토큰 인증을 사용할 것이기 때문)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)     // session 기반 인증 안함 (우리는 토큰 인증을 사용할 것이기 때문)
                 .and()
-                .authorizeRequests().antMatchers("/", "/api/auth/**").permitAll()       // 인증 요청 중에서 '/' 경로와, '/api/auth' 로 시작하는 경로는 인증하지 않고 모두 허용
+                .authorizeRequests().antMatchers("/", "/api/auth/**").permitAll()       // 인증 요청 중에서 '/' 경로와, '/api/auth' 로 시작하는 경로는 인증하지 않고 모두 허용, 이외의 요청은 403 에러
                 .anyRequest().authenticated();      // 그 외의 모든 경로는 인증을 거쳐야 함
+
+        // 토큰 인증 필터 등록
+        http.addFilterAfter(
+                jwtAuthFilter,      // 커스텀 필터
+                CorsFilter.class    // import 주의 (spring) : 누구 뒤에 붙일지
+        );
 
         return http.build();
     }

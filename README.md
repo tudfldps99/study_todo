@@ -143,6 +143,11 @@
 24. TodoRepository.java 에 특정 회원(User) 의 할일 목록 조회 추가 (연관관계 이용)
 25. TodoRepositoryTest.java 수정 
 
+- Jwt
+
+26. src/main/java/com/example/study_todo/security/JwtAuthFilter.java 생성 및 작성
+27. TokenProvider.java 수정 (validateAndGetUserId 추가)
+28. WebSecurityConfig.java 수정 (토큰 인증 필터 등록)
 
 ---
 ## 필기
@@ -170,3 +175,20 @@
 - @BindingResult : ModelAttribute 을 이용하여 매개변수를 Bean 에 binding 할 때, 발생한 오류 정보를 받기 위해 선언해야 하는 어노테이션
 - @PathVariable("id") : id를 경로에서 읽음
 - @EnableWebSecurity : 사용자 정의 보안 정의 클래스 활성화
+
+### JWT
+```
+{
+"sub" : 토큰 식별값,
+"iss" : 토큰 발급자 정보,
+"iat" : 언제발급했는지 시간정보,
+"exp": 토큰 만료시간
+}
+서명 (위조확인)
+```
+
+### 공통 코드 처리 
+(로그 출력, 요청헤더 파싱, 세션 검사, 쿠키 검사)
+1. 필터 : 프론트 컨트롤러 앞에서 작동
+2. 인터셉터 : 하위 컨트롤러 앞뒤에서 작동
+3. AOP : 각 메서드 앞뒤에도 작동
