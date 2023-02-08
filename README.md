@@ -74,6 +74,19 @@
 2. src/main/java/com/example/study_todo/repository/UserRepository.java (interface) 생성 및 작성
 3. Test 파일 생성 = repository 에서 Ctrl + Shift + t 로 테스트파일 생성 (UserRepositoryTest.java)
 
+- Service
+  : 비즈니스 로직을 수행하고 DB에 접근하는 DAO 를 이용해서 결과값을 받아옴 (중간처리) (DAO - Repository(JPA))
+
+4. src/main/java/com/example/study_todo/service/UserService.java 생성 및 작성
+
+- DTO
+  : 
+
+-> UserService.java 수정하면서 DTO 파일 생성
+
+5. src/main/java/com/example/study_todo/dto/response/UserSignUpResponseDTO.java 생성 및 작성
+6. src/main/java/com/example/study_todo/dto/request/UserSignUpRequestDTO.java 생성 및 작성
+7. Test 파일 생성 = repository 에서 Ctrl + Shift + t 로 테스트파일 생성 (TodoServiceTest.java)
 
 ---
 ## 필기
