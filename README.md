@@ -130,11 +130,18 @@
 
 - Token
 
-src/main/java/com/example/study_todo/security/TokenProvider.java 생성 및 작성
+17. src/main/java/com/example/study_todo/security/TokenProvider.java 생성 및 작성
 18. src/main/java/com/example/study_todo/dto/response/LoginResponseDTO.java 생성 및 작성
 19. UserService.java 수정 
 20. src/main/java/com/example/study_todo/dto/request/LoginRequestDTO.java 생성 및 작성
 21. UserApiController.java 수정
+22. UserServiceTest.java 수정
+
+- 연관관계 매핑
+
+23. TodoEntity.java 에 연관관계 매핑
+24. TodoRepository.java 에 특정 회원(User) 의 할일 목록 조회 추가 (연관관계 이용)
+25. TodoRepositoryTest.java 수정 
 
 
 ---

@@ -33,4 +33,9 @@ public class TodoEntity {           // DB 와 연결할 때만
     @CreationTimestamp
     private LocalDateTime createDate;       // 일정 등록 시간
 
+    // 연관관계 매핑) 회원 Entity 와 관계 설정
+    // 할 일이 다, 회원이 일
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

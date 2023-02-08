@@ -3,7 +3,6 @@ package com.example.study_todo.service;
 import com.example.study_todo.dto.request.UserSignUpRequestDTO;
 import com.example.study_todo.dto.response.LoginResponseDTO;
 import com.example.study_todo.dto.response.UserSignUpResponseDTO;
-import com.example.study_todo.entity.UserEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +92,7 @@ class UserServiceTest {
 
         // then
         assertEquals("소똥이", loginUser.getUserName());
+        System.out.println(loginUser);
 
     }
 }

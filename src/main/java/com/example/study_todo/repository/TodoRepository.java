@@ -10,6 +10,9 @@ public interface TodoRepository extends JpaRepository<TodoEntity, String> {     
                                                                                 //       인터페이스를 만드는 것만으로도 Entity 클래스에 대한 insert, update, delete, select 실행 가능
                                                                                 // JpaRepository< Entity 클래스 명, Entity 클래스의 PK 자료형>
     // 완료되지 않은 할일들만 조회
-    @Query("SELECT t FROM TodoEntity t WHERE t.done = 0")
+    @Query("SELECT t FROM TodoEntity t WHERE t.done = 1")
     List<TodoEntity> findNotYetTodos();
+
+    // 특정 회원의 할 일 목록 조회
+    List<TodoEntity> findByUserId(String userId);
 }

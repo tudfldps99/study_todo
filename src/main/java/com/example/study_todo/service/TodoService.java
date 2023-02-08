@@ -9,6 +9,7 @@ import com.example.study_todo.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class TodoService {      // 중간처리
 
 
     // 할 일 목록 조회
+    @Transactional
     public TodoListResponseDTO retrieve() {
         List<TodoEntity> entityList = todoRepository.findAll();     // TodoEntity 를 TodoListResponseDTO 로 변경해서 return 해줘야 함
 
