@@ -22,34 +22,51 @@ public class TodoService {      // 중간처리
 
     private final TodoRepository todoRepository;
 
-
     // 할 일 목록 조회
     @Transactional
-    public TodoListResponseDTO retrieve() {
-        List<TodoEntity> entityList = todoRepository.findAll();     // TodoEntity 를 TodoListResponseDTO 로 변경해서 return 해줘야 함
+    public TodoListResponseDTO retrieve(String userId) {    // findByUserId로 변경하면서 retrieve() 에 매개변수로 String userId 추가
+
+        //findAll 이 아닌 findByUserId 로 변경 - 해당 user 의 할 일만 받아와야 하기 때문
+        List<TodoEntity> entityList = todoRepository.findByUserId(userId);
 
         // 1. TodoEntity 를 TodoDetailResponseDTO 로 우선 변경
         List<TodoDetailResponseDTO> dtoList = entityList.stream()
                 .map(TodoDetailResponseDTO::new)
                 .collect(Collectors.toList());
 
-        return TodoListResponseDTO
-                .builder()
+        return TodoListResponseDTO.builder()
                 .todos(dtoList)
                 .build();
     }
 
     // 할 일 등록
-    public TodoListResponseDTO create( final TodoCreateRequestDTO createRequestDTO ) throws RuntimeException {
-        todoRepository.save(createRequestDTO.toEntity());       // DTO 를 Entity 로 변환해서, save 메서드 안에 넣기 --> TodoCreateRequestDTO.java 참고
+    public TodoListResponseDTO create(
+            final TodoCreateRequestDTO createRequestDTO,
+            String userId       // 로그인 한 사람은 자기 할일만 추가 가능하기때문에 userId 추가
+    ) throws RuntimeException {
+
+        TodoEntity todo = createRequestDTO.toEntity();      // createRequestDTO 를 entity 로 변환
+
+        // user 정보를 직접 추가해줘야함. like) todo.setUser()
+        // why? createRequestDTO 에는 user 정보가 없기때문 (TodoEntity 에서 title 은 DTO 가 보내고, todoId, done, createDate 는 자동이지만, user 만 없음)
+        // but) 그러기 위해서는 user 를 SELECT 한 후 id 값을 넣어줌? SELECT 할게 1000개라면?
+        // -> TodoEntity.java 에 INSERT,UPDATE 시에만 사용 할 userId 생성
+        // => userRepository 에 의존할 필요가 없어짐
+        todo.setUserId(userId);
+
+        todoRepository.save(todo);      // DTO 를 Entity 로 변환해서 save 메서드 안에 넣기 --> TodoCreateRequestDTO.java 참고
 
         log.info("할 일이 저장되었습니다. 제목: {}", createRequestDTO.getTitle());
 
-        return retrieve();
+        return retrieve(userId);
     }
 
     // 할 일 수정
-    public TodoListResponseDTO modify( final String id, final TodoModifyRequestDTO modifyRequestDTO) {      // id : 수정 대상의 id, modifyRequestDTO : 클라이언트가 보낸 데이터 (수정값)
+    public TodoListResponseDTO modify(
+            final String id,    // // id : 수정 대상의 id,
+            final TodoModifyRequestDTO modifyRequestDTO,     // modifyRequestDTO : 클라이언트가 보낸 데이터 (수정값)
+            final String userId     // 로그인 한 user 는 본인 할 일만 수정 가능
+    ) {
 
         // 수정 target 조회
         Optional<TodoEntity> targetEntity = todoRepository.findById(id);
@@ -61,11 +78,14 @@ public class TodoService {      // 중간처리
             todoRepository.save(entity);        // setter 해준 후 다시 save
         });
 
-        return retrieve();
+        return retrieve(userId);
     }
 
     // 할 일 삭제
-    public TodoListResponseDTO delete (final String id) {       // id : 삭제 대상의 id
+    public TodoListResponseDTO delete (
+            final String id,        // id : 삭제 대상의 id
+            final String userId     // 로그인 한 user 는 본인 할 일만 삭제 가능
+    ) {
         try {
             todoRepository.deleteById(id);      // id가 존재하지 않거나, null 이면 error
         } catch (Exception e) {
@@ -73,6 +93,6 @@ public class TodoService {      // 중간처리
 
             throw new RuntimeException("id가 존재하지 않아 삭제에 실패했습니다.");      // [클라이언트에게 전달할 메세지]
         }
-        return retrieve();
+        return retrieve(userId);
     }
 }

@@ -149,6 +149,9 @@
 27. TokenProvider.java 수정 (validateAndGetUserId 추가)
 28. WebSecurityConfig.java 수정 (토큰 인증 필터 등록)
 
+
+29. TodoService.java 수정 (userId 추가) -> 맞춰서 TodoApiController.java 변경
+
 ---
 ## 필기
 - Health Check : 서버 상태 확인
