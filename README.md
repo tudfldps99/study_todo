@@ -120,6 +120,9 @@
 15. 이메일 중복 확인을 위해 UserService.java, UserApiController.java 파일 수정
 
 
+16. 로그인 검증을 위해 UserService.java, UserServiceTest.java 파일 수정
+
+
 ---
 ## 필기
 - Health Check : 서버 상태 확인
