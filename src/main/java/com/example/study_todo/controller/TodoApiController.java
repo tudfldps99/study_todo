@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/todos")
+@CrossOrigin(origins = "*")     // crossOrigin 문제 해결
 public class TodoApiController {
 
     private final TodoService todoService;
