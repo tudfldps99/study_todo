@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")        // 공통 URL
-@CrossOrigin
+//@CrossOrigin      //  CrossOrigin 주석 처리 -> /config/CorsConfig.java
 public class UserApiController {
 
     private final UserService userService;

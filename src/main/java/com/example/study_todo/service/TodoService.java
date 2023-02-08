@@ -47,7 +47,7 @@ public class TodoService {      // 중간처리
 
         TodoEntity todo = createRequestDTO.toEntity();      // createRequestDTO 를 entity 로 변환
 
-        // user 정보를 직접 추가해줘야함. like) todo.setUser()
+        // user 정보를 직접 추가해줘야함. like) todo.setUser(Entity 값)
         // why? createRequestDTO 에는 user 정보가 없기때문 (TodoEntity 에서 title 은 DTO 가 보내고, todoId, done, createDate 는 자동이지만, user 만 없음)
         // but) 그러기 위해서는 user 를 SELECT 한 후 id 값을 넣어줌? SELECT 할게 1000개라면?
         // -> TodoEntity.java 에 INSERT,UPDATE 시에만 사용 할 userId 생성

@@ -152,6 +152,12 @@
 
 29. TodoService.java 수정 (userId 추가) -> 맞춰서 TodoApiController.java 변경
 
+
+- Cors 정책 설정
+
+30. src/main/java/com/example/study_todo/config/CorsConfig.java 생성 및 작성
+31. Controller 의 CrossOrigin 주석 처리
+
 ---
 ## 필기
 - Health Check : 서버 상태 확인

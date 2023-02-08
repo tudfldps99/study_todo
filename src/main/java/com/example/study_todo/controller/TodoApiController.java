@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/todos")
-@CrossOrigin(origins = "*")     // crossOrigin 문제 해결
+//@CrossOrigin(origins = "*")     //  CrossOrigin 주석 처리 -> /config/CorsConfig.java
 public class TodoApiController {
 
     private final TodoService todoService;
